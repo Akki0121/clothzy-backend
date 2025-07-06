@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
   try {
-    const { name, lastname, phone, email, password } = req.body;
+    const { name, phone, email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -13,7 +13,6 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       name,
-      lastname,
       phone,
       email,
       password: hashedPassword,
@@ -100,10 +99,10 @@ const deleteUser = async (req, res) => {
 const updateProfile = async (req, res) => {
   try {
     const { id } = req.user;
-    const { email, name, lastname, phone } = req.body;
+    const { email, name, phone } = req.body;
     const userData = await User.findByIdAndUpdate(
       id,
-      { name, lastname, phone, email },
+      { name, phone, email },
       { new: true, runValidators: true }
     );
 

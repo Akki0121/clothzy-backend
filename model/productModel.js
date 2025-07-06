@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    category: {
       type: String,
       required: true,
     },
@@ -14,9 +14,20 @@ const ProductSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    originalprice: {
+      type: Number,
+    },
     imageUrl: {
       type: String,
       required: true,
+    },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    bestseller: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

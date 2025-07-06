@@ -2,13 +2,24 @@ const Product = require("../model/productModel");
 
 const addProduct = async (req, res) => {
   try {
-    const { name, description, price, imageUrl } = req.body;
+    const {
+      name,
+      category,
+      price,
+      originalprice,
+      imageUrl,
+      rating,
+      bestseller,
+    } = req.body;
 
     const newProduct = new Product({
       name,
-      description,
+      category,
       price,
+      originalprice,
       imageUrl,
+      rating,
+      bestseller,
     });
     const product = await newProduct.save();
     if (!product) {
@@ -52,12 +63,13 @@ const getAllProducts = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { name, description, price, imageUrl } = req.body;
+  const { name, category, price, originalprice, imageUrl, rating, bestseller } =
+    req.body;
 
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       id,
-      { name, description, price, imageUrl },
+      { name, category, price, originalprice, imageUrl, rating, bestseller },
       {
         new: true,
         runValidators: true,
